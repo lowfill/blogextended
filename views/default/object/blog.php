@@ -7,9 +7,9 @@
  *
  * @package ElggBlogExtended
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
- * @author Diego Ramirez <diego@somosmas.org>
- * @copyright Corporacion Somos mas 2009
- * @link http://somosmas.org/
+ * @author Diego Andrés Ramírez Aragón <dramirezaragon@gmail.com>
+ * @copyright Corporación Somos más - 2009; Diego Andrés Ramirez Aragón 2009
+ * @link http://github.com/lowfill/blogextended
  *
  * @uses $vars['entity'] Optionally, the blog post to view
  */

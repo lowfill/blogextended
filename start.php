@@ -4,9 +4,9 @@
  *
  * @package ElggBlogExtended
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
- * @author Diego Andrés Ramírez Aragón <diego@somosmas.org>
- * @copyright Corporación Somos más - 2009
- * @link http://www.somosmas.org
+ * @author Diego Andrés Ramírez Aragón <dramirezaragon@gmail.com>
+ * @copyright Corporación Somos más - 2009; Diego Andrés Ramirez Aragón 2009
+ * @link http://github.com/lowfill/blogextended
  */
 
 /**
@@ -16,12 +16,12 @@
  */
 function blogextended_init(){
   global $CONFIG;
-  extend_view("css","blogextended/css");
+  elgg_extend_view("css","blogextended/css");
 
-  extend_view("blog/fields_before","blog/forms/type");
-  extend_view("blog/fields_before","groups/groupselector");
+  elgg_extend_view("blog/fields_before","blog/forms/type");
+  elgg_extend_view("blog/fields_before","groups/groupselector");
 
-  extend_view('groups/left_column', 'groups/groupcontents',1);
+  elgg_extend_view('groups/left_column', 'groups/groupcontents',1);
 
   add_widget_type('blog',elgg_echo('blog:widget:title'), elgg_echo('blog:widget:description'));
 
@@ -36,7 +36,7 @@ function blogextended_init(){
       $CONFIG->itemicon[]=array();
     }
     $CONFIG->itemicon[] = "blog";
-    extend_view("blog/fields_after","itemicon/add");
+    elgg_extend_view("blog/fields_after","itemicon/add");
   }
   register_blogextension("blog");
 
