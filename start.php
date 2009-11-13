@@ -25,11 +25,11 @@ function blogextended_init(){
 
   add_widget_type('blog',elgg_echo('blog:widget:title'), elgg_echo('blog:widget:description'));
 
-  register_elgg_event_handler("create","object","blog_type_handler");
-  register_elgg_event_handler("update","object","blog_type_handler");
+  register_elgg_event_handler("create","object","blogextended_blog_type_handler");
+  register_elgg_event_handler("update","object","blogextended_blog_type_handler");
 
-  register_elgg_event_handler("create","object","group_selector_handler");
-  register_elgg_event_handler("update","object","group_selector_handler");
+  register_elgg_event_handler("create","object","blogextended_group_selector_handler");
+  register_elgg_event_handler("update","object","blogextended_group_selector_handler");
 
   if(is_plugin_enabled("itemicon")){
     if(!isset($CONFIG->itemicon)){
@@ -38,7 +38,7 @@ function blogextended_init(){
     $CONFIG->itemicon[] = "blog";
     elgg_extend_view("blog/fields_after","itemicon/add");
   }
-  register_blogextension("blog");
+  blogextended_register_extension("blog");
 
 }
 
@@ -63,7 +63,7 @@ function blogextended_pagesetup(){
  * @param object $object Blog object
  * @return boolean
  */
-function blog_type_handler($event, $object_type, $object){
+function blogextended_blog_type_handler($event, $object_type, $object){
   global $CONFIG;
   $blogextended_types = array_keys($CONFIG->blogextended);
   $subtype = $object->getSubtype();
@@ -100,7 +100,7 @@ function blog_type_handler($event, $object_type, $object){
  * @param object $object Blog object
  * @return boolean
  */
-function group_selector_handler($event, $object_type, $object){
+function blogextended_group_selector_handler($event, $object_type, $object){
   global $CONFIG;
   $blogextended_types = array_keys($CONFIG->blogextended);
   $subtype = $object->getSubtype();
@@ -119,7 +119,7 @@ function group_selector_handler($event, $object_type, $object){
   return true;
 }
 
-function register_blogextension($extension){
+function blogextended_register_extension($extension){
   global $CONFIG;
 
   if(!is_array($CONFIG->blogextended)){
