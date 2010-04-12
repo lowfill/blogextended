@@ -6,5 +6,5 @@
 	<field key="website" value="http://www.somosmas.org/" />
 	<field key="copyright" value="(C) Corporacion Somos más 2008" />
 	<field key="licence" value="GNU Public License version 2" />
-	<field key="elgg_version" value="2009021601" />
+	<field key="elgg_version" value="2010030101" />
 </plugin_manifest>

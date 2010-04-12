@@ -11,6 +11,7 @@
  */
 global $CONFIG;
 
+echo "Aqui!";
 if(get_plugin_setting("extra_types","blogextended")=="yes"){
 
   $value = "";
