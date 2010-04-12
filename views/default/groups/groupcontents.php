@@ -15,7 +15,9 @@
 <h2><?php echo elgg_echo("group:contents"); ?></h2>
 <?php
 set_context("search");
-$objects = list_entities_from_metadata("content_owner",page_owner(), "object","blog",0, 5, false,false,false);
+//list_entities_groups($subtype = "", $owner_guid = 0, $container_guid = 0, $limit = 10, $fullview = true, $viewtypetoggle = true, $pagination = true) {
+
+$objects = list_entities_groups("blog",0,page_owner(), 5, false,false,false);
 if(!empty($objects)){
   echo $objects;
 }

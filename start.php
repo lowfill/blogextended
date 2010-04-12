@@ -23,8 +23,6 @@ function blogextended_init(){
 
     elgg_extend_view('groups/left_column', 'groups/groupcontents',1);
 
-    add_widget_type('blog',elgg_echo('blog:widget:title'), elgg_echo('blog:widget:description'));
-
     register_elgg_event_handler("create","object","blogextended_blog_type_handler");
     register_elgg_event_handler("update","object","blogextended_blog_type_handler");
 
