@@ -11,6 +11,10 @@
  */
 
 ?>
+
+.b-input-text'{
+	size:10px;
+}
 .river_item p.tags {
 	background:transparent url(<?php echo $vars['url']; ?>_graphics/icon_tag.gif) no-repeat scroll left 2px;
 	margin:0pt 0pt 0pt 20px;

@@ -5,7 +5,7 @@
  * @package ElggBlogExtended
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Diego Andrés Ramírez Aragón <dramirezaragon@gmail.com>
- * @copyright Corporación Somos más - 2009; Diego Andrés Ramirez Aragón 2009
+ * @copyright Corporación Somos más - 2009; Diego Andrés Ramirez Aragón 200
  * @link http://github.com/lowfill/blogextended
  */
 
@@ -15,46 +15,23 @@
  * Register css extensions, contentes view for groups, widgets and event handlers
  */
 function blogextended_init(){
-  global $CONFIG;
-  elgg_extend_view("css","blogextended/css");
+    global $CONFIG;
+    elgg_extend_view("css","blogextended/css");
 
-  elgg_extend_view("blog/fields_before","blogextended/categories");
-  elgg_extend_view("blog/fields_before","groups/groupselector");
+    elgg_extend_view("blog/fields_before","blogextended/categories");
+    elgg_extend_view("blog/fields_before","groups/groupselector");
 
-  elgg_extend_view('groups/left_column', 'groups/groupcontents',1);
+    elgg_extend_view('groups/left_column', 'groups/groupcontents',1);
 
-  add_widget_type('blog',elgg_echo('blog:widget:title'), elgg_echo('blog:widget:description'));
+    add_widget_type('blog',elgg_echo('blog:widget:title'), elgg_echo('blog:widget:description'));
 
-  register_elgg_event_handler("create","object","blogextended_blog_type_handler");
-  register_elgg_event_handler("update","object","blogextended_blog_type_handler");
+    register_elgg_event_handler("create","object","blogextended_blog_type_handler");
+    register_elgg_event_handler("update","object","blogextended_blog_type_handler");
 
-  register_elgg_event_handler("create","object","blogextended_group_selector_handler");
-  register_elgg_event_handler("update","object","blogextended_group_selector_handler");
-
-  if(is_plugin_enabled("itemicon")){
-    if(!isset($CONFIG->itemicon)){
-      $CONFIG->itemicon[]=array();
-    }
-    $CONFIG->itemicon[] = "blog";
-    elgg_extend_view("blog/fields_after","itemicon/add");
-  }
-  blogextended_register_extension("blog");
-
+    register_elgg_event_handler("create","object","blogextended_group_selector_handler");
+    register_elgg_event_handler("update","object","blogextended_group_selector_handler");
 }
 
-function blogextended_pagesetup(){
-  global $CONFIG;
-  $options = array(
-  				"--"=>elgg_echo("blog:type:other"),
-  				"blog:type:news"=>elgg_echo("blog:type:news"),
-  				"blog:type:convocatory"=>elgg_echo("blog:type:convocatory"),
-  				"blog:type:event"=>elgg_echo("blog:type:event"),
-  );
-
-
-  $CONFIG->blogextended["blog"] = trigger_plugin_hook('blog:type:fields', 'object',null, $options);
-
-}
 /**
  * Blog type handler. Sets the blog type property
  *
@@ -64,31 +41,27 @@ function blogextended_pagesetup(){
  * @return boolean
  */
 function blogextended_blog_type_handler($event, $object_type, $object){
-  global $CONFIG;
-  $blogextended_types = array_keys($CONFIG->blogextended);
-  $subtype = $object->getSubtype();
-  if(in_array($subtype,$blogextended_types)){
-    $blog_type = get_input("blog_type");
+    global $CONFIG;
+    $blog_type = get_input("category");
     switch($event){
-      case "create":
-      case "update":
-        if(!empty($blog_type)){
-          $object->clearMetadata("blog_type");
-          $object->set("blog_type",$blog_type);;
-          if(!empty($type)){
-            //Registering metadata in all the registered languages for easy localized search
-            $translations = get_installed_translations();
-            foreach($translations as $key=>$value){
-              $var = "blog_type_{$key}";
-              $object->clearMetadata($var);
-              $object->set($var,elgg_echo($blog_type,$key));
+        case "create":
+        case "update":
+            if(!empty($blog_type)){
+                $object->clearMetadata("category");
+                $object->set("category",$blog_type);;
+                if(!empty($type)){
+                    //Registering metadata in all the registered languages for easy localized search
+                    $translations = get_installed_translations();
+                    foreach($translations as $key=>$value){
+                        $var = "category_{$key}";
+                        $object->clearMetadata($var);
+                        $object->set($var,elgg_echo($blog_type,$key));
+                    }
+                }
             }
-          }
-        }
-        break;
+            break;
     }
-  }
-  return true;
+    return true;
 }
 
 /**
@@ -101,36 +74,27 @@ function blogextended_blog_type_handler($event, $object_type, $object){
  * @return boolean
  */
 function blogextended_group_selector_handler($event, $object_type, $object){
-  global $CONFIG;
-  $blogextended_types = array_keys($CONFIG->blogextended);
-  $subtype = $object->getSubtype();
-  if(in_array($subtype,$blogextended_types)){
+    global $CONFIG;
     $content_owner = get_input("content_owner");
     if(!empty($content_owner)){
-      switch($event){
-        case "create":
-        case "update":
-          $object->clearMetadata("content_owner");
-          $object->set("content_owner",$content_owner);
-          break;
-      }
+        switch($event){
+            case "create":
+            case "update":
+                $object->clearMetadata("content_owner");
+                $object->set("content_owner",$content_owner);
+                break;
+        }
     }
-  }
-  return true;
+    return true;
 }
 
-function blogextended_register_extension($extension){
-  global $CONFIG;
-
-  if(!is_array($CONFIG->blogextended)){
-    $CONFIG->blogextended = array();
-  }
-  if(!array_key_exists($extension,$CONFIG->blogextended)){
-    $CONFIG->blogextended[$extension] = array();
-  }
+function blogextended_get_categories(){
+    $resp = array(
+        '--'=>elgg_echo("blogextended:type:other"),
+        'blogextended:type:news'=>elgg_echo('blogextended:type:news'),
+        );
+        return $resp;
 }
-
 register_elgg_event_handler('init','system','blogextended_init');
-register_elgg_event_handler('pagesetup','system','blogextended_pagesetup');
 
 ?>
