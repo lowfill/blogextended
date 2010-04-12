@@ -179,7 +179,10 @@ EOT;
 	</div><div class="clearfloat"></div><!-- /two_column_left_sidebar_maincontent -->
 EOT;
 
-		echo elgg_view('input/form', array('action' => "{$vars['url']}action/$action", 'body' => $form_body, 'internalid' => 'blogPostForm'));
+		echo elgg_view('input/form', array('action' => "{$vars['url']}action/$action",
+										   'body' => $form_body,
+		                                   'enctype'=>'multipart/form-data',
+					   					   'internalid' => 'blogPostForm'));
 		?>
 
 <script type="text/javascript">
