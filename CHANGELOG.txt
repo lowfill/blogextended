@@ -1,6 +1,8 @@
 
 Version 1.4.0
 	Updated to work with Elgg 1.7
+	Droped users blog widget
+	Initial for work with Elgg 1.7 search
 	
 Version 1.3.2
 	Separation of the different components of blog post creation

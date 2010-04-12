@@ -9,8 +9,9 @@
  * @link http://github.com/lowfill/blogextended
  */
 $english = array(
+
 /**
- * Search
+ * Search category type, please change category_{lang} key for your language
  */
   'tag_names:category_en'=>'Category',
 /**

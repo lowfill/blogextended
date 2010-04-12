@@ -5,7 +5,7 @@
  * @package ElggBlogExtended
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Diego Andrés Ramírez Aragón <dramirezaragon@gmail.com>
- * @copyright Corporación Somos más - 2009; Diego Andrés Ramirez Aragón 200
+ * @copyright Corporación Somos más - 2009; Diego Andrés Ramirez Aragón 2010
  * @link http://github.com/lowfill/blogextended
  */
 
@@ -29,6 +29,7 @@ function blogextended_init(){
     register_elgg_event_handler("create","object","blogextended_group_selector_handler");
     register_elgg_event_handler("update","object","blogextended_group_selector_handler");
 
+    // Registering category_{lang} for be used by tag search
     $translations = get_installed_translations();
     foreach($translations as $key=>$value){
         elgg_register_tag_metadata_name("category_{$key}");
@@ -91,6 +92,9 @@ function blogextended_group_selector_handler($event, $object_type, $object){
     return true;
 }
 
+/**
+ * Gets the configured blog categories
+ */
 function blogextended_get_categories(){
     $resp = array(
         '--'=>elgg_echo("blogextended:type:other"),

@@ -16,10 +16,13 @@ Install
 3) Activate it
 4) Configure extra settings (enable/disable categories,groups and icon overwrite)
 
-Roadmap
--------
-http://www.pivotaltracker.com/projects/72723
-  
+How to add new categories?
+--------------------------
+Add the new categories at start.php#blogextended_get_categories
+
+If you want to change the way they are asked to the user edit/overwrite
+views/default/blogextended/category.php
+
 
 How works the blog post group 'ownership' works?
 ------------------------------------------------
@@ -29,3 +32,10 @@ AND in the group profile.
 
 At this moment the group owner couldn't edit or deny blog posts content but its a planed feature
 to support some kind of pre-approval process to let group owners accept/deny contents for their group.
+
+
+Roadmap
+-------
+http://www.pivotaltracker.com/projects/72723
+  
+
