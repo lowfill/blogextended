@@ -24,7 +24,7 @@ if(get_plugin_setting("groupcontents","blogextended")=="yes"){
     $options_values = array(get_loggedin_userid()=>elgg_echo("my:profile"));
 
     $options['relationship'] = 'member';
-    $options['relationship_guid'] = get_loggedin_userid();
+    $options['relationship_guid'] = page_owner();
     $options['inverse_relationship'] = false;
     $options['types']=array('group');
     $options['subtypes']=array(ELGG_ENTITIES_NO_VALUE);
@@ -36,14 +36,11 @@ if(get_plugin_setting("groupcontents","blogextended")=="yes"){
         }
 ?>
 <p><label><?php echo $field_label; ?></label><br />
-    <?php echo elgg_view("input/pulldown",array("internalname"=>"content_owner",
+    <?php echo elgg_view("input/pulldown",array("internalname"=>"container_guid",
     											"options_values"=>$options_values,
     											"value"=>$value)); ?>
 </p>
 <?php
-    }
-    else{
-        echo elgg_view('input/hidden',array('internalname'=>'content_owner',get_loggedin_userid()));
     }
 }
 ?>

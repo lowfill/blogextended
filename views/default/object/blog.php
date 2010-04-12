@@ -8,78 +8,60 @@
  * @package ElggBlogExtended
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Diego Andrés Ramírez Aragón <dramirezaragon@gmail.com>
- * @copyright Corporación Somos más - 2009; Diego Andrés Ramirez Aragón 2009
+ * @copyright Corporación Somos más - 2009; Diego Andrés Ramirez Aragón 200
  * @link http://github.com/lowfill/blogextended
  *
  * @uses $vars['entity'] Optionally, the blog post to view
  */
 
 if (isset($vars['entity'])) {
-  //display comments link?
-  if ($vars['entity']->comments_on == 'Off') {
-    $comments_on = false;
-  } else {
-    $comments_on = true;
-  }
-
-  if (get_context() == "search") {
-
-    //display the correct layout depending on gallery or list view
-    if (get_input('search_viewtype') == "gallery" && $vars['entity'] instanceof ElggObject) {
-
-      //display the gallery view
-      echo elgg_view("blog/gallery",$vars);
-
+    //display comments link?
+    if ($vars['entity']->comments_on == 'Off') {
+        $comments_on = false;
     } else {
-
-      echo elgg_view("blog/listing",$vars);
-
+        $comments_on = true;
     }
 
-
-  } else {
-    if ($vars['entity'] instanceof ElggObject) {
-
-      $url = $vars['entity']->getURL();
-      $owner = $vars['entity']->getOwnerEntity();
-      $canedit = $vars['entity']->canEdit();
+    if (get_context() == "search" && $vars['entity'] instanceof ElggObject) {
+        //display the correct layout depending on gallery or list view
+        if (get_input('search_viewtype') == "gallery") {
+            //display the gallery view
+            echo elgg_view("blog/gallery",$vars);
+        } else {
+            echo elgg_view("blog/listing",$vars);
+        }
 
     } else {
+        if ($vars['entity'] instanceof ElggObject) {
+            $url = $vars['entity']->getURL();
+            $owner = $vars['entity']->getOwnerEntity();
+            $canedit = $vars['entity']->canEdit();
+        } else {
+            $url = 'javascript:history.go(-1);';
+            $owner = $vars['user'];
+            $canedit = false;
+        }
 
-      $url = 'javascript:history.go(-1);';
-      $owner = $vars['user'];
-      $canedit = false;
-
-    }
-
-    ?>
+?>
 <div class="contentWrapper singleview">
 
 <div class="blog_post">
-<h3><a href="<?php echo $url; ?>"><?php echo $vars['entity']->title; ?></a>
-<?php
-if(!empty($vars["entity"]->content_owner)){
-  $content_owner = get_entity($vars["entity"]->content_owner);
-  $link = '<a href="'.$content_owner->getURL().'">'.$content_owner->name.'</a>';
-  echo '<span class="content_owner_item">&nbsp;&nbsp;('.sprintf(elgg_echo("publish:for"),$link).')</span>';
-}
-?>
-</h3>
+<h3><a href="<?php echo $url; ?>"><?php echo $vars['entity']->title; ?></a></h3>
 <!-- display the user icon -->
 <div class="blog_post_icon"><?php
-$content_owner = $vars['entity']->content_owner;
+$content_owner = $vars['entity']->container_guid;
 if(get_plugin_setting("iconoverwrite","blogextended")== "yes" && !empty($content_owner)){
-  echo elgg_view("profile/icon",array('entity' => get_entity($content_owner), 'size' => 'small','entity_id'=>$vars['entity']->guid));
+    echo elgg_view("profile/icon",array('entity' => get_entity($content_owner), 'size' => 'tiny','entity_id'=>$vars['entity']->guid));
 }
 else{
-  echo elgg_view("profile/icon",array('entity' => $owner, 'size' => 'small','entity_id'=>$vars['entity']->guid));
+    echo elgg_view("profile/icon",array('entity' => $owner, 'size' => 'tiny','entity_id'=>$vars['entity']->guid));
 }
 ?></div>
 <!-- Blog type -->
 <p class="strapline"><?php
-$type = $vars["entity"]->blog_type;
+$type = $vars["entity"]->category;
 if(!empty($type) && $type!="--"){
-  echo elgg_view('output/tags', array('tags' => elgg_echo($vars["entity"]->blog_type)));
+    echo elgg_view('output/tags', array('tags' => elgg_echo($vars["entity"]->category)));
 }
 ?></p>
 <p class="strapline"><?php
@@ -92,22 +74,22 @@ date("F j, Y",$vars['entity']->time_created)
 	href="<?php echo $vars['url']; ?>pg/blog/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a>
 &nbsp; <!-- display the comments link --> <?php
 if($comments_on && $vars['entity'] instanceof ElggObject){
-  //get the number of comments
-  $num_comments = elgg_count_comments($vars['entity']);
-  ?> <a href="<?php echo $url; ?>"><?php echo sprintf(elgg_echo("comments")) . " (" . $num_comments . ")"; ?></a><br />
-  <?php
+    //get the number of comments
+    $num_comments = elgg_count_comments($vars['entity']);
+    ?> <a href="<?php echo $url; ?>"><?php echo sprintf(elgg_echo("comments")) . " (" . $num_comments . ")"; ?></a><br />
+    <?php
 }
 ?></p>
 <!-- display tags --> <?php
 
 $tags = elgg_view('output/tags', array('tags' => $vars['entity']->tags));
 if (!empty($tags)) {
-  echo '<p class="tags">' . $tags . '</p>';
+    echo '<p class="tags">' . $tags . '</p>';
 }
 
 $categories = elgg_view('categories/view', $vars);
 if (!empty($categories)) {
-  echo '<p class="categories">' . $categories . '</p>';
+    echo '<p class="categories">' . $categories . '</p>';
 }
 
 echo elgg_view("blog/output/extra_fields",$vars);
@@ -123,7 +105,7 @@ echo elgg_view('output/longtext',array('value' => $vars['entity']->description))
 
 if ($canedit) {
 
-  ?> <a
+    ?> <a
 	href="<?php echo $vars['url']; ?>mod/blog/edit.php?blogpost=<?php echo $vars['entity']->getGUID(); ?>"><?php echo elgg_echo("edit"); ?></a>
 &nbsp; <?php
 
