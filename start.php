@@ -28,6 +28,11 @@ function blogextended_init(){
 
     register_elgg_event_handler("create","object","blogextended_group_selector_handler");
     register_elgg_event_handler("update","object","blogextended_group_selector_handler");
+
+    $translations = get_installed_translations();
+    foreach($translations as $key=>$value){
+        elgg_register_tag_metadata_name("category_{$key}");
+    }
 }
 
 /**
@@ -47,7 +52,7 @@ function blogextended_blog_type_handler($event, $object_type, $object){
             if(!empty($blog_type)){
                 $object->clearMetadata("category");
                 $object->set("category",$blog_type);;
-                if(!empty($type)){
+                if(!empty($blog_type)){
                     //Registering metadata in all the registered languages for easy localized search
                     $translations = get_installed_translations();
                     foreach($translations as $key=>$value){
@@ -90,8 +95,8 @@ function blogextended_get_categories(){
     $resp = array(
         '--'=>elgg_echo("blogextended:type:other"),
         'blogextended:type:news'=>elgg_echo('blogextended:type:news'),
-        );
-        return $resp;
+    );
+    return $resp;
 }
 register_elgg_event_handler('init','system','blogextended_init');
 
