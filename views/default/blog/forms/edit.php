@@ -86,7 +86,7 @@ if (!empty($extras)) $extras = '<div id="blog_edit_sidebar">' . $extras . '</div
 
 // Before and after fields
 $fields_before = elgg_view("blog/fields_before",$vars);
-$fields_after = elgg_view("blog/fields_after",$vars);
+$fields_after  = elgg_view("blog/fields_after",$vars);
 ?>
 
 <?php

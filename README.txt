@@ -3,18 +3,23 @@ Blog extended plugin
 
 Features:
   - Extend the edit blog view to support before and after description fields.
-  - Add support for blog types
+  - Add support for blog categories 
   - Add support for assign blog 'ownership' to a group (Read more after)
-  - Widget for show blog posts in the profile
   - Overwrite post icon with the group icon (if it is associated to a group)
-  
+  - Widget for show blog posts in the profile
+
 Install
 -------
 
-Just drop it on your mod directory and then go to the admin panel and activate it. 
+1) Drop it on your mod directory
+2) Go to admin panel put it after default's blog plugin
+3) Activate it
+4) Configure extra settings (enable/disable categories,groups and icon overwrite)
 
-Take on mind that this plugins overwrites some blog plugin behaviors so it need 
-to be loaded after it.
+Roadmap
+-------
+http://www.pivotaltracker.com/projects/72723
+  
 
 How works the blog post group 'ownership' works?
 ------------------------------------------------

@@ -12,12 +12,10 @@ $english = array(
 /**
  * Blog types translations
  */
-  'blog:type'=>"Content type",
-  'blog:type:other'=>"Other",
-  'blog:type:news'=>"News",
-  'blog:type:goodpractice'=>"Good practice",
-  'blog:type:convocatory' => "Call",
-'blog:type:event'=>"Event",
+  'blogextended:type'=>"Content type",
+  'blogextended:type:other'=>"Other",
+  'blogextended:type:news'=>"News",
+  'blogextended:type:event'=>"Event",
 
 /**
  * Blog widget

@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog type selector view
+ * Blog category selector view
  *
  * @package ElggBlogExtended
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
@@ -11,19 +11,21 @@
  */
 global $CONFIG;
 
-echo "Aqui!";
 if(get_plugin_setting("extra_types","blogextended")=="yes"){
 
+  //TODO Add support to 'draft'
   $value = "";
   if(isset($vars["entity"])){
-    $value = $vars["entity"]->blog_type;
+    $value = $vars["entity"]->category;
   }
 
-  $context = get_context();
-  $options = $CONFIG->blogextended[$context];
-  ?>
-<p><label><?php echo elgg_echo("blog:type"); ?></label><br />
-  <?php echo elgg_view("input/pulldown",array("internalname"=>"blog_type","options_values"=>$options,"value"=>$value)); ?>
+  $categories=blogextended_get_categories();
+?>
+<p><label><?php echo elgg_echo("blogextended:type"); ?></label><br />
+  <?php echo elgg_view("input/pulldown",
+                       array("internalname"=>"category",
+                       		 "options_values"=>$categories,
+                       		 "value"=>$value)); ?>
 </p>
 <?php
 }
