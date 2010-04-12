@@ -18,7 +18,7 @@ function blogextended_init(){
   global $CONFIG;
   elgg_extend_view("css","blogextended/css");
 
-  elgg_extend_view("blog/fields_before","blog/forms/type");
+  elgg_extend_view("blog/fields_before","blogextended/categories");
   elgg_extend_view("blog/fields_before","groups/groupselector");
 
   elgg_extend_view('groups/left_column', 'groups/groupcontents',1);
