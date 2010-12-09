@@ -110,7 +110,7 @@ function blogextended_get_categories(){
                   "blog:type:goodpractice"=>elgg_echo("blog:type:goodpractice"),
                   "blog:type:event"=>elgg_echo("blog:type:event"),
 	);
-
+	$resp = trigger_plugin_hook('blogextended:fields', 'blogextended', NULL, $resp);
 	return $resp;
 }
 register_elgg_event_handler('init','system','blogextended_init');
