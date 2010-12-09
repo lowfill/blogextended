@@ -59,9 +59,9 @@ else{
 ?></div>
 <!-- Blog type -->
 <p class="strapline"><?php
-$type = $vars["entity"]->category;
+$type = $vars["entity"]->blog_type;
 if(!empty($type) && $type!="--"){
-    echo elgg_view('output/tags', array('tags' => elgg_echo($vars["entity"]->category)));
+    echo elgg_view('output/tags', array('tags' => elgg_echo($vars["entity"]->blog_type)));
 }
 ?></p>
 <p class="strapline"><?php

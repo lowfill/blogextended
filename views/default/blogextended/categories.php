@@ -16,14 +16,14 @@ if(get_plugin_setting("extra_types","blogextended")=="yes"){
   //TODO Add support to 'draft'
   $value = "";
   if(isset($vars["entity"])){
-    $value = $vars["entity"]->category;
+    $value = $vars["entity"]->blog_type;
   }
 
   $categories=blogextended_get_categories();
 ?>
 <p><label><?php echo elgg_echo("blogextended:type"); ?></label><br />
   <?php echo elgg_view("input/pulldown",
-                       array("internalname"=>"category",
+                       array("internalname"=>"blog_type",
                        		 "options_values"=>$categories,
                        		 "value"=>$value)); ?>
 </p>
