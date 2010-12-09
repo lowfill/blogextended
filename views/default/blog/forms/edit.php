@@ -62,6 +62,15 @@ $tag_label = elgg_echo('tags');
 $tag_input = elgg_view('input/tags', array('internalname' => 'blogtags', 'value' => $tags));
 $access_label = elgg_echo('access');
 
+$legends = array('title','text','tags','access');
+foreach($legends as $legend_tag){
+	$legend = elgg_echo("blog:{$legend_tag}:legend");
+	if(strpos($legend,'blog:')!==0){ 
+		$var_name = "{$legend_tag}_label_legend";
+		$$var_name=$legend;
+	}
+}
+
 //$comments_select = elgg_view('input/checkboxes', array('internalname' => 'comments_on', 'value' => ''));
 if($comments_on)
 $comments_on_switch = "checked=\"checked\"";
@@ -147,7 +156,7 @@ EOT;
 
 		$form_body .= <<<EOT
 		<p>
-			<label>$title_label</label><br />
+			<label>$title_label <small>$title_label_legend</small></label><br />
 			$title_textbox
 		</p>
 
@@ -156,7 +165,7 @@ EOT;
 		<!-- end fields_before -->
 
 		<p class='longtext_editarea'>
-			<label>$text_label</label><br />
+			<label>$text_label <small>$text_label_legend</small></label><br />
 			$text_textarea
 		</p>
 
@@ -165,11 +174,11 @@ EOT;
 		<!-- end fields_after -->
 
 		<p>
-			<label>$tag_label</label><br />
+			<label>$tag_label <small>$tags_label_legend</small></label><br />
 			$tag_input
 		</p>
 		<!-- <p>
-			<label>$access_label</label><br />
+			<label>$access_label <small>$access_label_legend</small></label><br />
 			$access_input
 		</p> -->
 		<p>
